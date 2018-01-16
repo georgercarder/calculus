@@ -18,6 +18,22 @@ class expression:
 	def getString(self):
 		return self.__string
 
+	def derive(self, wrt):
+		self.__wrt=wrt
+		__simplified=self.simplify()
+		__terms=self.string.split('+')
+		for i in range(len(__terms)):
+			if re.findall(self.__wrt,__terms[i])==[]:
+				pass
+			else:
+				__terms[i]=deriveterm(__terms[i])
+		__derived=""
+		for i in range(len(__terms)):
+			__derived=__derived+__terms[i]+'+'	
+		__derived=__derived.rstrip('+')
+		return __derived
+
+
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
 
