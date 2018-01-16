@@ -26,7 +26,7 @@ class expression:
 			if re.findall(self.__wrt,__terms[i])==[]:
 				pass
 			else:
-				__terms[i]=deriveterm(__terms[i])
+				__terms[i]=deriveterm(__terms[i]) #need to define deriveterm
 		__derived=""
 		for i in range(len(__terms)):
 			__derived=__derived+__terms[i]+'+'	
