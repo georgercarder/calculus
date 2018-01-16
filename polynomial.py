@@ -20,7 +20,7 @@ class expression:
 
 	def derive(self, wrt):
 		self.__wrt=wrt
-		__simplified=self.simplify()
+		self.simplify()
 		__terms=self.string.split('+')
 		for i in range(len(__terms)):
 			if re.findall(self.__wrt,__terms[i])==[]:
