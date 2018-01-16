@@ -44,4 +44,5 @@ class expression:
 
 		__simplified=__simplified.rstrip('+')
 		print(__simplified)
-		
+		self.__string=__simplified
+		return self.__string		
