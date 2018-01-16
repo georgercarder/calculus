@@ -1,7 +1,9 @@
 
 import re
 
-##goal here is polynomials
+## goal here is polynomials
+## need to build binomial formula and other mult simplifiers
+## need to build derivative wrt each variable
 
 class expression:
 
@@ -16,8 +18,10 @@ class expression:
 	def getString(self):
 		return self.__string
 
+	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to
+ 2x^2+7x^3y^5+2y'
 
-	def simplify(self):
+	def simplify(self):	
 		__terms=self.__string.split("+")
 		print(__terms)
 		__c=[]
