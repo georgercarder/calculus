@@ -17,10 +17,10 @@ class expression:
 	def setString(self,string):
 		self.__string=string
 
-	def getString(self):
+	def getString(self):		# string of form '2x^3-5y^2+7x^2'
 		return self.__string
 
-	def derive(self, wrt):
+	def derive(self, wrt):		# self.derive('x') to derive wrt x
 		self.__wrt=wrt
 		self.simplify()
 		__terms=self.getString().split('+')
@@ -39,7 +39,7 @@ class expression:
 		__derived=__derived.rstrip('+')
 		return __derived
 
-	def deriveterm(self,__term,__wrt):
+	def deriveterm(self,__term,__wrt): 	# derives terms having variable of interest
 		__term=__term
 		__wrt=__wrt
 		if len(re.findall(__wrt, __term))==0:
@@ -63,15 +63,12 @@ class expression:
 				self.__derivedterm=str(__c)+str(__wrt)
 	
 			return self.__derivedterm
-###
-
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
 	def simplify(self):	
-		__terms=self.__string.replace('-','+-').split("+")
+		__terms=self.__string.replace('-','+-').split("+") 	# resolving negative coefficients
 		__c=[]
 		__d=[]
-		print(__terms)
 		for i in range(len(__terms)):
 			if re.findall(r'^-*\d',__terms[i])==[]:
 				__c.append('1')
@@ -80,7 +77,6 @@ class expression:
 		for i in range(len(__terms)):
 			__d.append(re.sub("^-*\d+","",__terms[i]))
 		simpdict={}
-		print(__c)
 		for i in range(len(__terms)):
 			if __d[i] in simpdict:
 				simpdict[__d[i]]=int(__c[i])+int(simpdict[__d[i]])
