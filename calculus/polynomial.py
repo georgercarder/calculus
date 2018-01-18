@@ -1,6 +1,8 @@
 
 import re
 
+## expression simplify() and derive() are ready.
+## use: exp=expression('2x^3+4y^7+5x^3'), exp.derive('y') derives wrt y
 ## goal here is polynomials
 ## need to build binomial formula and other mult simplifiers
 ## need to build derivative wrt each variable
