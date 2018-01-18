@@ -94,7 +94,7 @@ class expression:
 				simpdict[__d[i]]=__c[i]
 		print(simpdict)
 		for i in simpdict:
-			if i!="" and simpdict[i]==1:
+			if i!="" and simpdict[i]=='1':
 				simpdict[i]=""
 		print(simpdict)
 		__simplified=""	
