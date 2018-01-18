@@ -26,12 +26,15 @@ class expression:
 		self.func('hey')
 		for i in range(len(__terms)):
 			if re.findall(self.__wrt,__terms[i])==[]:
-				pass
+				pass	
 			else:
 				__terms[i]=self.deriveterm(__terms[i],wrt) 
 		__derived=""
 		for i in range(len(__terms)):
-			__derived=__derived+__terms[i]+'+'	
+			if re.findall(self.__wrt,__terms[i])==[]:
+				pass
+			else:
+				__derived=__derived+__terms[i]+'+'	
 		__derived=__derived.rstrip('+')
 		return __derived
 
@@ -89,6 +92,10 @@ class expression:
 				simpdict[__d[i]]=int(__c[i])+int(simpdict[__d[i]])
 			else:
 				simpdict[__d[i]]=__c[i]
+		print(simpdict)
+		for i in simpdict:
+			if i!="" and simpdict[i]==1:
+				simpdict[i]=""
 		print(simpdict)
 		__simplified=""	
 		for i in simpdict:
