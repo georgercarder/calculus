@@ -5,8 +5,7 @@ import re
 ## use: exp=expression('2x^3+4y^7+5x^3'), exp.derive('y') derives wrt y
 ## goal here is polynomials
 ## need to build binomial formula and other mult simplifiers
-## need to build derivative wrt each variable
-## need to address negative coefficients
+## need to address negative coefficients-- resolved
 
 class expression:
 
@@ -69,17 +68,19 @@ class expression:
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
 	def simplify(self):	
-		__terms=self.__string.split("+")
+		__terms=self.__string.replace('-','+-').split("+")
 		__c=[]
 		__d=[]
+		print(__terms)
 		for i in range(len(__terms)):
-			if re.findall(r'^\d',__terms[i])==[]:
+			if re.findall(r'^-*\d',__terms[i])==[]:
 				__c.append('1')
 			else:
-				__c.append(re.sub(r'\D(.*)','',__terms[i])[0])
+				__c.append(re.sub(r'[a-z]+(.*)','',__terms[i]))
 		for i in range(len(__terms)):
-			__d.append(re.sub("^\d+","",__terms[i]))
+			__d.append(re.sub("^-*\d+","",__terms[i]))
 		simpdict={}
+		print(__c)
 		for i in range(len(__terms)):
 			if __d[i] in simpdict:
 				simpdict[__d[i]]=int(__c[i])+int(simpdict[__d[i]])
