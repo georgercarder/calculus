@@ -26,13 +26,24 @@ class expression:
 			if re.findall(self.__wrt,__terms[i])==[]:
 				pass
 			else:
-				__terms[i]=deriveterm(__terms[i]) #need to define deriveterm
+				__terms[i]=deriveterm(__terms[i],wrt) #need to define deriveterm
 		__derived=""
 		for i in range(len(__terms)):
 			__derived=__derived+__terms[i]+'+'	
 		__derived=__derived.rstrip('+')
 		return __derived
 
+	def deriveterm(__term, wrt):
+		if len(re.findall( wrt, __term))==0:
+			return 0
+		else:
+			if len(re.findall('^\d*',__term))==0:
+				__c=1
+			else:
+				__c=re.findall('^\d*',__term)
+
+			__wrtex=wrt+'\^*\d*'
+### here grep ^ to see if exponent is 1:
 
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
