@@ -4,6 +4,7 @@ import re
 ## goal here is polynomials
 ## need to build binomial formula and other mult simplifiers
 ## need to build derivative wrt each variable
+## need to address negative coefficients
 
 class expression:
 
