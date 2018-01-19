@@ -42,6 +42,7 @@ class expression:
 		__derived=__derived.rstrip('+')
 		if __derived=="":
 			__derived='0'
+		__derived=__derived.replace('+-','-')
 		return __derived
 
 	def deriveterm(self,__term,__wrt): 	# derives terms having variable of interest
@@ -94,6 +95,6 @@ class expression:
 		for i in simpdict:
 			__simplified=__simplified+str(simpdict[i])+i+'+'
 
-		__simplified=__simplified.rstrip('+')
+		__simplified=__simplified.replace('+-','-').rstrip('+')
 		self.__string=__simplified
 		return self.__string		
