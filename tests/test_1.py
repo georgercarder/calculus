@@ -28,4 +28,4 @@ def test5():
 
 def test6():
 	exp6=expression('2x^3+1y')
-	assert(exp6.simplify()=='2x^3+y')
+	assert(exp6.simplify()=='y+2x^3')

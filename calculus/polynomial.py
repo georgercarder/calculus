@@ -28,18 +28,14 @@ class expression:
 		self.__wrt=wrt
 		self.simplify()
 		__terms=self.getString().split('+')
-
+		__derived=""
 		for i in range(len(__terms)):
 			if re.findall(self.__wrt,__terms[i])==[]:
 				pass	
 			else:
 				__terms[i]=self.deriveterm(__terms[i],wrt) 
-		__derived=""
-		for i in range(len(__terms)):
-			if re.findall(self.__wrt,__terms[i])==[]:
-				pass
-			else:
-				__derived=__derived+__terms[i]+'+'	
+				__derived=__derived+__terms[i]+'+'
+		#print(__terms)
 		__derived=__derived.rstrip('+')
 		if __derived=="":
 			__derived='0'
@@ -63,16 +59,25 @@ class expression:
 			__wrtbetw=re.findall(__wrtbet,__term)
 			__wrtaft=__wrt+'\^*\d*(.*)'
 			__wrtafter=re.findall(__wrtaft,__term)
+
+		#	print(__wrtex,__wrtexp,__wrtbet,__wrtbetw,__wrtaft,__wrtafter)
+
 			if len(re.findall('\^',__wrtexp[0]))==0:
-				__exp=1
+				__exp=['1']
 			else:
 				__exp=re.findall('\d+$',__wrtexp[0])
+			if __exp==[]:
+				__exp=['1']	
 			__c=int(__c[0])*int(__exp[0])
 			if int(__exp[0])!=2:
-				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+"^"+str(int(__exp[0])-1)+str(__wrtafter[0])
+				if int(__exp[0])!=1:
+					self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+"^"+str(int(__exp[0])-1)+str(__wrtafter[0])
+				else:
+					self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrtafter[0])
 			else:
 				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+str(__wrtafter[0])
 	
+		#	print(self.__derivedterm)	
 			return self.__derivedterm
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
