@@ -1,7 +1,7 @@
 
 import re
 
-## PROBLEM!! ex=expression('2x^3y') ex.derive('x') gives '6x^2'. FIX THIS!! :
+## --FIXED ///PROBLEM!! ex=expression('2x^3y') ex.derive('x') gives '6x^2'. FIX THIS!! :
 ## expression simplify() and derive() are ready.
 ## use: exp=expression('2x^3+4y^7+5x^3'), exp.derive('y') derives wrt y
 ## goal here is polynomials
@@ -59,15 +59,19 @@ class expression:
 
 			__wrtex=__wrt+'\^*\d*'
 			__wrtexp=re.findall(__wrtex,__term)
+			__wrtbet='^\d*(.*)'+__wrt
+			__wrtbetw=re.findall(__wrtbet,__term)
+			__wrtaft=__wrt+'\^*\d*(.*)'
+			__wrtafter=re.findall(__wrtaft,__term)
 			if len(re.findall('\^',__wrtexp[0]))==0:
 				__exp=1
 			else:
 				__exp=re.findall('\d+$',__wrtexp[0])
 			__c=int(__c[0])*int(__exp[0])
 			if int(__exp[0])!=2:
-				self.__derivedterm=str(__c)+str(__wrt)+"^"+str(int(__exp[0])-1)
+				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+"^"+str(int(__exp[0])-1)+str(__wrtafter[0])
 			else:
-				self.__derivedterm=str(__c)+str(__wrt)
+				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+str(__wrtafter[0])
 	
 			return self.__derivedterm
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
