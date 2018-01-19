@@ -1,6 +1,7 @@
 
 import re
 
+## PROBLEM!! ex=expression('2x^3y') ex.derive('x') gives '6x^2'. FIX THIS!! :
 ## expression simplify() and derive() are ready.
 ## use: exp=expression('2x^3+4y^7+5x^3'), exp.derive('y') derives wrt y
 ## goal here is polynomials
