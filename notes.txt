@@ -1,0 +1,8 @@
+
+install:
+sudo pip3 install .
+
+test run:
+pytest
+or
+python setup.py test

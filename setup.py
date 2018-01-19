@@ -10,8 +10,9 @@ setup(name="calculus",
 	scripts=[],	
 	install_requires=[], ## other packages	
 	dependency_links=[], ## links for dep not on pypi	
-	test_suite='',		## nose.collector	
-	tests_require=[],	## 'nose'
+	test_suite='pytest',		## nose.collector	
+	tests_require=['pytest'],	## 'nose'
+	setup_requires=['pytest-runner'],
 	packages=['calculus'],
 	zip_safe=False)
 

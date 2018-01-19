@@ -16,6 +16,9 @@ class expression:
 
 	def setString(self,string):
 		self.__string=string
+		if self.__string=='':
+			self.__string=='0'
+		return self.__string
 
 	def getString(self):		# string of form '2x^3-5y^2+7x^2'
 		return self.__string
@@ -37,6 +40,8 @@ class expression:
 			else:
 				__derived=__derived+__terms[i]+'+'	
 		__derived=__derived.rstrip('+')
+		if __derived=="":
+			__derived='0'
 		return __derived
 
 	def deriveterm(self,__term,__wrt): 	# derives terms having variable of interest
