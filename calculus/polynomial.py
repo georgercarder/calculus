@@ -96,7 +96,7 @@ class expression:
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
 	def simplify(self):	
-		__terms=self.__string.replace('-','+-').split("+") 	# resolving negative coefficients
+		__terms=self.__string.replace('-','+-').replace("^+-","^-").split("+") 	# resolving negative coefficients
 		__terms=[i for i in __terms if i!='']	
 		__c=[]
 		__d=[]
@@ -105,14 +105,17 @@ class expression:
 				__c.append('1')
 			else:
 				__c.append(re.sub(r'[a-z]+(.*)','',__terms[i]))
+		print("__c",__c)	
 		for i in range(len(__terms)):
 			__d.append(re.sub("^-*\d+","",__terms[i]))
+		print("__d",__d)	
 		simpdict={}
 		for i in range(len(__terms)):
 			if __d[i] in simpdict:
 				simpdict[__d[i]]=int(__c[i])+int(simpdict[__d[i]])
 			else:
 				simpdict[__d[i]]=__c[i]
+		print(simpdict)	
 		for i in simpdict:
 			if i!="" and simpdict[i]=='1':
 				simpdict[i]=""
@@ -122,4 +125,5 @@ class expression:
 
 		__simplified=__simplified.replace('+0','').replace('0+','').rstrip('+')
 		self.__string=__simplified
+		print(self.__string)
 		return self.__string		

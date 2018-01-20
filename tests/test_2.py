@@ -21,3 +21,11 @@ def test2_4():
 def test2_5():
 	exp5=expression('-y^6x^7')
 	assert(exp5.derive('y')=='-6y^5x^7')
+
+def test2_6():
+	exp6=expression('y^-4')
+	assert(exp6.derive('y')=='-4y^-5')
+
+def test2_7():
+	exp7=expression('y^-4')
+	assert(exp7.simplify()=='y^-4')
