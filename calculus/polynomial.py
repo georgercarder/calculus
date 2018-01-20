@@ -59,6 +59,8 @@ class expression:
 	#			print('here')
 			else:
 				__c=re.findall('^-*\d*',__term)
+				if __c==['-']:
+					__c=['-1']
 				print(__c)	
 				print('there')
 
@@ -77,7 +79,7 @@ class expression:
 				__exp=re.findall('-*\d+$',__wrtexp[0])
 			if __exp==[]:
 				__exp=['1']
-	#		print(__c,__exp)	
+			print(__c,__exp)	
 			__c=int(__c[0])*int(__exp[0])
 			if int(__exp[0])!=2:
 				if int(__exp[0])!=1:
