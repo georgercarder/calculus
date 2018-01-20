@@ -111,6 +111,6 @@ class expression:
 		for i in sorted(simpdict):
 			__simplified=__simplified+str(simpdict[i])+i+'+'
 
-		__simplified=__simplified.replace('+-','-').rstrip('+')
+		__simplified=__simplified.replace('0+','').replace('+-','-').rstrip('+')
 		self.__string=__simplified
 		return self.__string		
