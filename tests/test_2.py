@@ -29,3 +29,7 @@ def test2_6():
 def test2_7():
 	exp7=expression('y^-4')
 	assert(exp7.simplify()=='y^-4')
+
+def test2_8():
+	exp8=expression('2x^-7-2y^-5')
+	assert(exp8.derive('y')=='10y^-6')
