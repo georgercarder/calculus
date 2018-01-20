@@ -6,3 +6,6 @@ test run:
 pytest
 or
 python setup.py test
+
+recall:
+pytest test_mod.py::test_func

@@ -45,13 +45,17 @@ class expression:
 	def deriveterm(self,__term,__wrt): 	# derives terms having variable of interest
 		__term=__term
 		__wrt=__wrt
+		print(__term,__wrt)
 		if len(re.findall(__wrt, __term))==0:
 			return "" 
 		else:
-			if len(re.findall('^\d*',__term))==0:
-				__c=1
+			print(re.findall('^\d*',__term))	
+			if len(re.findall('^\d*',__term)[0])==0:
+				__c=['1']
+				print('here')
 			else:
 				__c=re.findall('^\d*',__term)
+				print('there')
 
 			__wrtex=__wrt+'\^*\d*'
 			__wrtexp=re.findall(__wrtex,__term)
@@ -67,12 +71,14 @@ class expression:
 			else:
 				__exp=re.findall('\d+$',__wrtexp[0])
 			if __exp==[]:
-				__exp=['1']	
+				__exp=['1']
+			print(__c,__exp)	
 			__c=int(__c[0])*int(__exp[0])
 			if int(__exp[0])!=2:
 				if int(__exp[0])!=1:
 					self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+"^"+str(int(__exp[0])-1)+str(__wrtafter[0])
 				else:
+					print(__c,__wrtbetw,__wrtafter)
 					self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrtafter[0])
 			else:
 				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+str(__wrtafter[0])
@@ -102,7 +108,7 @@ class expression:
 			if i!="" and simpdict[i]=='1':
 				simpdict[i]=""
 		__simplified=""	
-		for i in simpdict:
+		for i in sorted(simpdict):
 			__simplified=__simplified+str(simpdict[i])+i+'+'
 
 		__simplified=__simplified.replace('+-','-').rstrip('+')

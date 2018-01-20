@@ -20,12 +20,12 @@ def test3():
 
 def test4():
 	exp4=expression('2x^3+4y^2+5x^3')
-	assert(exp4.simplify()=='4y^2+7x^3')
+	assert(exp4.simplify()=='7x^3+4y^2')
 
 def test5():
 	exp5=expression('2x^3-4y^2-5x^3')
-	assert(exp5.simplify()=='-4y^2-3x^3')
+	assert(exp5.simplify()=='-3x^3-4y^2')
 
 def test6():
 	exp6=expression('2x^3+1y')
-	assert(exp6.simplify()=='y+2x^3')
+	assert(exp6.simplify()=='2x^3+y')
