@@ -1,12 +1,11 @@
 
 import re
 
-## --FIXED ///PROBLEM!! ex=expression('2x^3y') ex.derive('x') gives '6x^2'. FIX THIS!! :
-## expression simplify() and derive() are ready.
+## expression simplify() and derive() and derived() are ready for testing.
 ## use: exp=expression('2x^3+4y^7+5x^3'), exp.derive('y') derives wrt y
+## use: '' '' exp.derived('y') changes value of exp to exp.derive('y')
 ## goal here is polynomials
 ## need to build binomial formula and other mult simplifiers
-## need to address negative coefficients-- resolved
 
 class expression:
 
@@ -22,6 +21,12 @@ class expression:
 		return self.__string
 
 	def getString(self):		# string of form '2x^3-5y^2+7x^2'
+		return self.__string
+	
+	def derived(self, wrt):
+		self.__wrt=wrt
+		self.__string=self.derive(self.__wrt)
+		self.simplify()
 		return self.__string
 
 	def derive(self, wrt):		# self.derive('x') to derive wrt x
@@ -39,29 +44,29 @@ class expression:
 		__derived=__derived.rstrip('+')
 		if __derived=="":
 			__derived='0'
-		__derived=__derived.replace('+-','-')
 		return __derived
 
 	def __deriveterm(self,__term,__wrt): 	# derives terms having variable of interest
 		__term=__term
 		__wrt=__wrt
-	#	print(__term,__wrt)
+		print(__term,__wrt)
 		if len(re.findall(__wrt, __term))==0:
 			return "" 
 		else:
-			print(re.findall('^\d*',__term))	
-			if len(re.findall('^\d*',__term)[0])==0:
+			print(re.findall('^-*\d*',__term))	
+			if len(re.findall('^-*\d*',__term)[0])==0:
 				__c=['1']
 	#			print('here')
 			else:
-				__c=re.findall('^\d*',__term)
-	#			print('there')
+				__c=re.findall('^-*\d*',__term)
+				print(__c)	
+				print('there')
 
-			__wrtex=__wrt+'\^*\d*'
+			__wrtex=__wrt+'\^*-*\d*'
 			__wrtexp=re.findall(__wrtex,__term)
-			__wrtbet='^\d*(.*)'+__wrt
+			__wrtbet='^-*\d*(.*)'+__wrt
 			__wrtbetw=re.findall(__wrtbet,__term)
-			__wrtaft=__wrt+'\^*\d*(.*)'
+			__wrtaft=__wrt+'\^*-*\d*(.*)'
 			__wrtafter=re.findall(__wrtaft,__term)
 
 		#	print(__wrtex,__wrtexp,__wrtbet,__wrtbetw,__wrtaft,__wrtafter)
@@ -69,7 +74,7 @@ class expression:
 			if len(re.findall('\^',__wrtexp[0]))==0:
 				__exp=['1']
 			else:
-				__exp=re.findall('\d+$',__wrtexp[0])
+				__exp=re.findall('-*\d+$',__wrtexp[0])
 			if __exp==[]:
 				__exp=['1']
 	#		print(__c,__exp)	
@@ -83,7 +88,8 @@ class expression:
 			else:
 				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+str(__wrtafter[0])
 	
-		#	print(self.__derivedterm)	
+		#	print(self.__derivedterm)
+            	
 			return self.__derivedterm
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
@@ -112,6 +118,6 @@ class expression:
 		for i in sorted(simpdict):
 			__simplified=__simplified+str(simpdict[i])+i+'+'
 
-		__simplified=__simplified.replace('0+','').replace('+-','-').rstrip('+')
+		__simplified=__simplified.replace('0+','').rstrip('+')
 		self.__string=__simplified
 		return self.__string		
