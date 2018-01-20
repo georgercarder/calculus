@@ -33,7 +33,7 @@ class expression:
 			if re.findall(self.__wrt,__terms[i])==[]:
 				pass	
 			else:
-				__terms[i]=self.deriveterm(__terms[i],wrt) 
+				__terms[i]=self.__deriveterm(__terms[i],wrt) 
 				__derived=__derived+__terms[i]+'+'
 		#print(__terms)
 		__derived=__derived.rstrip('+')
@@ -42,7 +42,7 @@ class expression:
 		__derived=__derived.replace('+-','-')
 		return __derived
 
-	def deriveterm(self,__term,__wrt): 	# derives terms having variable of interest
+	def __deriveterm(self,__term,__wrt): 	# derives terms having variable of interest
 		__term=__term
 		__wrt=__wrt
 		print(__term,__wrt)
