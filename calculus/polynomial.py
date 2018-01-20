@@ -89,6 +89,7 @@ class expression:
 
 	def simplify(self):	
 		__terms=self.__string.replace('-','+-').split("+") 	# resolving negative coefficients
+		__terms=[i for i in __terms if i!='']	
 		__c=[]
 		__d=[]
 		for i in range(len(__terms)):
