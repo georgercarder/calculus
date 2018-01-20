@@ -120,6 +120,6 @@ class expression:
 		for i in sorted(simpdict):
 			__simplified=__simplified+str(simpdict[i])+i+'+'
 
-		__simplified=__simplified.replace('0+','').rstrip('+')
+		__simplified=__simplified.replace('+0','').replace('0+','').rstrip('+')
 		self.__string=__simplified
 		return self.__string		
