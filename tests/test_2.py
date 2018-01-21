@@ -33,3 +33,8 @@ def test2_7():
 def test2_8():
 	exp8=expression('2x^-7-2y^-5')
 	assert(exp8.derive('y')=='10y^-6')
+
+def test2_9():
+	exp9=expression('0')
+	assert(exp9.simplify()=='0')
+

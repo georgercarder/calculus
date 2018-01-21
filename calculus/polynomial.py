@@ -124,6 +124,8 @@ class expression:
 			__simplified=__simplified+str(simpdict[i])+i+'+'
 
 		__simplified=__simplified.replace('+0','').replace('0+','').rstrip('+')
+		if __simplified=='':
+			__simplified='0'	
 		self.__string=__simplified
 		print(self.__string)
 		return self.__string		
