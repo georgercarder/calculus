@@ -50,49 +50,46 @@ class expression:
 		__term=__term
 		__wrt=__wrt
 		print(__term,__wrt)
-		if len(re.findall(__wrt, __term))==0:
-			return "" 
+		print(re.findall('^-*\d*',__term))	
+		if len(re.findall('^-*\d*',__term)[0])==0:
+			__c=['1']
+	#		print('here')
 		else:
-			print(re.findall('^-*\d*',__term))	
-			if len(re.findall('^-*\d*',__term)[0])==0:
-				__c=['1']
-	#			print('here')
-			else:
-				__c=re.findall('^-*\d*',__term)
-				if __c==['-']:
-					__c=['-1']
-				print(__c)	
-				print('there')
+			__c=re.findall('^-*\d*',__term)
+			if __c==['-']:
+				__c=['-1']
+			print(__c)	
+			print('there')
 
-			__wrtex=__wrt+'\^*-*\d*'
-			__wrtexp=re.findall(__wrtex,__term)
-			__wrtbet='^-*\d*(.*)'+__wrt
-			__wrtbetw=re.findall(__wrtbet,__term)
-			__wrtaft=__wrt+'\^*-*\d*(.*)'
-			__wrtafter=re.findall(__wrtaft,__term)
+		__wrtex=__wrt+'\^*-*\d*'
+		__wrtexp=re.findall(__wrtex,__term)
+		__wrtbet='^-*\d*(.*)'+__wrt
+		__wrtbetw=re.findall(__wrtbet,__term)
+		__wrtaft=__wrt+'\^*-*\d*(.*)'
+		__wrtafter=re.findall(__wrtaft,__term)
 
-		#	print(__wrtex,__wrtexp,__wrtbet,__wrtbetw,__wrtaft,__wrtafter)
+	#	print(__wrtex,__wrtexp,__wrtbet,__wrtbetw,__wrtaft,__wrtafter)
 
-			if len(re.findall('\^',__wrtexp[0]))==0:
-				__exp=['1']
+		if len(re.findall('\^',__wrtexp[0]))==0:
+			__exp=['1']
+		else:
+			__exp=re.findall('-*\d+$',__wrtexp[0])
+		if __exp==[]:
+			__exp=['1']
+		print(__c,__exp)	
+		__c=int(__c[0])*int(__exp[0])
+		if int(__exp[0])!=2:
+			if int(__exp[0])!=1:
+				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+"^"+str(int(__exp[0])-1)+str(__wrtafter[0])
 			else:
-				__exp=re.findall('-*\d+$',__wrtexp[0])
-			if __exp==[]:
-				__exp=['1']
-			print(__c,__exp)	
-			__c=int(__c[0])*int(__exp[0])
-			if int(__exp[0])!=2:
-				if int(__exp[0])!=1:
-					self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+"^"+str(int(__exp[0])-1)+str(__wrtafter[0])
-				else:
-	#				print(__c,__wrtbetw,__wrtafter)
-					self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrtafter[0])
-			else:
-				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+str(__wrtafter[0])
-	
-		#	print(self.__derivedterm)
-            	
-			return self.__derivedterm
+#				print(__c,__wrtbetw,__wrtafter)
+				self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrtafter[0])
+		else:
+			self.__derivedterm=str(__c)+str(__wrtbetw[0])+str(__wrt)+str(__wrtafter[0])
+
+	#	print(self.__derivedterm)
+           	
+		return self.__derivedterm
 	#simplifies '2x^2+5x^3y^5+2y+2x^3y^5' to '2x^2+7x^3y^5+2y'
 
 	def simplify(self):	
