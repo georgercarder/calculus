@@ -1,25 +1,14 @@
 
 import re
+from .polynomial_1 import finitesum
 
 ## goal here is finite products 
+## a*(finitesum1)^e1***(finitesumN)^eN
 
 class finiteproduct(finitesum):
 
 	__string=None
 
 	def __init__(self,string):
-		self.__string=string
+		super(finiteproduct, self).__init__(string) 	
 
-	def setString(self,string):
-		self.__string=string
-		if self.__string=='':
-			self.__string=='0'
-		return self.__string
-
-	def getString(self):		
-		return self.__string
-	
-
-
-	def simplify(self):	
-		return self.__string		
