@@ -13,3 +13,8 @@ pytest test_mod.py::test_func
 
 source distribution:
 python setup.py sdist
+
+sample
+a='2(x^3+(2y(z+4u+3z)^2-3(x+86v^2-(22x+y+5x)))-72)^3'
+
+
