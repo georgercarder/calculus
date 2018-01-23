@@ -9,10 +9,11 @@ sudo pip3 install .
 
 within python3
 
-from calculus import expression
+from calculus import finitesum 
 
-exp=expression('2x^2+3x^3y^2z^6+4x^2')
+exp=finitesum('2x^2+3x^3y^2z^6+4x^2')
 
 exp.simplify() # will simplify
 exp.derive('y') # will derive wrt y
 exp.derive('z') # will derive wrt z etc.
+exp.derived('z') # will change value of exp.getString() to exp.derive('z')

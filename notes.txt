@@ -9,3 +9,7 @@ python setup.py test
 
 recall:
 pytest test_mod.py::test_func
+
+
+source distribution:
+python setup.py sdist

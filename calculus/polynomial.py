@@ -1,13 +1,12 @@
 
 import re
 
-## expression simplify() and derive() and derived() are ready for testing.
-## use: exp=expression('2x^3+4y^7+5x^3'), exp.derive('y') derives wrt y
+## finitesum simplify() and derive() and derived() are ready for testing.
+## use: exp=finitesum('2x^3+4y^7+5x^3'), exp.derive('y') derives wrt y
 ## use: '' '' exp.derived('y') changes value of exp to exp.derive('y')
-## goal here is polynomials
-## need to build binomial formula and other mult simplifiers
+## goal here is Laurent polynomials
 
-class expression:
+class finitesum:
 
 	__string=None
 
