@@ -1,1 +1,1 @@
-from .polynomial import finitesum 
+from .polynomial_1 import finitesum 
